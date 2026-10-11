@@ -1,0 +1,43 @@
+{
+  "model_version": "v1.2.0-lr",
+  "algorithm": "LogisticRegression (scikit-learn with StandardScaler)",
+  "training_timestamp": "2026-10-11T18:28:16.341449+00:00",
+  "n_samples": 1500,
+  "test_metrics": {
+    "accuracy": 0.8367,
+    "precision": 0.5114,
+    "recall": 0.8824,
+    "f1_score": 0.6475,
+    "roc_auc": 0.9316,
+    "confusion_matrix": [
+      [
+        206,
+        43
+      ],
+      [
+        6,
+        45
+      ]
+    ]
+  },
+  "baseline_comparison": {
+    "baseline_heuristic_name": "Simple Rule (GPA < 2.3 or failures >= 1)",
+    "baseline_accuracy": 0.6867,
+    "baseline_f1_score": 0.4719,
+    "improvement_over_baseline_f1": 0.1756
+  },
+  "feature_weights": {
+    "cumulative_gpa": -0.2747,
+    "recent_term_gpa": -1.0053,
+    "gpa_delta": -0.4408,
+    "credit_completion_ratio": -0.4753,
+    "course_failure_count": 1.0142,
+    "course_withdrawal_count": 0.6884,
+    "current_semester": -0.0649
+  },
+  "safeguards": {
+    "disclaimer": "Academic support indicator for advisor review only. Not an automated punitive or definitive judgment.",
+    "sensitive_attributes_used": false,
+    "human_in_the_loop_required": true
+  }
+}
