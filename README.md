@@ -2,6 +2,10 @@
 
 EduTrack AI is a full-stack student information and academic support platform. It combines normalized academic records, weighted GPA calculations, role-based JWT access, safe CSV workflows, institutional analytics, and transparent ML-assisted advisor indicators.
 
+**Live frontend demo:** https://frontend-peach-kappa-wuch3k5kag.vercel.app
+
+The live URL is a permanent Vercel deployment of the frontend. To make login and live data work in the hosted demo, configure `VITE_API_BASE_URL` in Vercel with the public URL of the persistent FastAPI backend described below.
+
 ## Stack
 
 - Backend: FastAPI, SQLAlchemy 2, Alembic, Pydantic 2, SQLite or PostgreSQL
@@ -34,6 +38,8 @@ The UI is available at `http://localhost:5173`; API documentation is at `http://
 The frontend is Vercel-ready. Deploy the `frontend` directory as the Vercel project root and set the Vercel environment variable `VITE_API_BASE_URL` to the public URL of a persistent FastAPI deployment, including `/api/v1`.
 
 The API should not use the local SQLite file in a serverless deployment. Use a persistent PostgreSQL database and set `DATABASE_URL`, `SECRET_KEY`, and the admin environment variables on the API host. This keeps the demo data and account changes from disappearing after a server restart.
+
+The current local API is intentionally not exposed to the public internet. Therefore, the Vercel frontend is publicly viewable, while hosted login/data requests require a separately deployed API URL. Vercel's rewrite fallback serves the SPA for unknown paths; it is not an API implementation.
 
 After deployment, add the permanent Vercel URL to this README and to the repository's About website field. Do not commit `.env`, database files, credentials, or `node_modules`.
 
