@@ -19,7 +19,12 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const { user, logout, isAdmin, isTeacher, isStudent } = useAuth();
   const navigate = useNavigate();
 
@@ -36,7 +41,9 @@ export const Sidebar: React.FC = () => {
     }`;
 
   return (
-    <aside className="w-64 shrink-0 bg-slate-900 border-r border-slate-800 text-slate-100 flex flex-col min-h-screen">
+    <>
+      {isOpen && <button aria-label="Close navigation" onClick={onClose} className="fixed inset-0 z-40 bg-slate-950/60 md:hidden" />}
+      <aside className={`fixed inset-y-0 left-0 z-50 flex w-72 shrink-0 flex-col border-r border-slate-800 bg-slate-900 text-slate-100 transition-transform duration-200 md:static md:z-auto md:min-h-screen md:w-64 md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
       {/* Brand Header */}
       <div className="p-6 border-b border-slate-800/80 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md shadow-blue-600/30">
@@ -54,7 +61,7 @@ export const Sidebar: React.FC = () => {
       </div>
 
       {/* Navigation Groups */}
-      <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
+      <nav onClick={onClose} className="flex-1 space-y-6 overflow-y-auto px-4 py-6">
         {/* Core Operations */}
         <div>
           <p className="px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
@@ -171,6 +178,7 @@ export const Sidebar: React.FC = () => {
           </button>
         </div>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 };
