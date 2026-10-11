@@ -2,13 +2,11 @@
 
 EduTrack AI is a full-stack student information and academic support platform. It combines normalized academic records, weighted GPA calculations, role-based JWT access, safe CSV workflows, institutional analytics, and transparent ML-assisted advisor indicators.
 
-**Live frontend demo:** https://frontend-peach-kappa-wuch3k5kag.vercel.app
-
-The live URL is a permanent Vercel deployment of the frontend. To make login and live data work in the hosted demo, configure `VITE_API_BASE_URL` in Vercel with the public URL of the persistent FastAPI backend described below.
+**Demo:** https://frontend-peach-kappa-wuch3k5kag.vercel.app
 
 ## Stack
 
-- Backend: FastAPI, SQLAlchemy 2, Alembic, Pydantic 2, SQLite or PostgreSQL
+- Backend: FastAPI, SQLAlchemy 2, Alembic, Pydantic 2, SQLite
 - Frontend: React 18, TypeScript, Vite, Tailwind CSS, TanStack Query, Recharts
 - ML: scikit-learn Logistic Regression with academic-only features
 
@@ -33,48 +31,6 @@ The live URL is a permanent Vercel deployment of the frontend. To make login and
 
 The UI is available at `http://localhost:5173`; API documentation is at `http://localhost:8000/api/v1/docs`.
 
-## Deployment
-
-The frontend is Vercel-ready. Deploy the `frontend` directory as the Vercel project root and set the Vercel environment variable `VITE_API_BASE_URL` to the public URL of a persistent FastAPI deployment, including `/api/v1`.
-
-The API should not use the local SQLite file in a serverless deployment. Use a persistent PostgreSQL database and set `DATABASE_URL`, `SECRET_KEY`, and the admin environment variables on the API host. This keeps the demo data and account changes from disappearing after a server restart.
-
-The current local API is intentionally not exposed to the public internet. Therefore, the Vercel frontend is publicly viewable, while hosted login/data requests require a separately deployed API URL. Vercel's rewrite fallback serves the SPA for unknown paths; it is not an API implementation.
-
-### Free Full-Stack Deployment
-
-For a functional free demo, use:
-
-- Vercel for the React frontend.
-- Render's free web service for the FastAPI backend.
-- Neon or Supabase's free PostgreSQL database for persistent data.
-
-The repository includes `render.yaml` for the backend. Import this repository at:
-
-```text
-https://dashboard.render.com/blueprints/new?repo=https://github.com/farhanshahriar3/EduTrack-AI
-```
-
-When Render asks for environment values, set:
-
-```text
-DATABASE_URL=your Neon or Supabase PostgreSQL connection string
-FIRST_ADMIN_PASSWORD=your new admin password
-BACKEND_CORS_ORIGINS=https://frontend-peach-kappa-wuch3k5kag.vercel.app
-```
-
-`BACKEND_CORS_ORIGINS` also accepts a JSON list or multiple comma-separated frontend URLs.
-
-After Render gives the API a URL such as `https://edutrack-api.onrender.com`, set this Vercel environment variable and redeploy:
-
-```text
-VITE_API_BASE_URL=https://edutrack-api.onrender.com/api/v1
-```
-
-The free Render service may sleep after inactivity, but PostgreSQL data remains persistent. The first request after sleeping can take a short time to wake the API.
-
-After deployment, add the permanent Vercel URL to this README and to the repository's About website field. Do not commit `.env`, database files, credentials, or `node_modules`.
-
 ## Verification
 
 ```powershell
@@ -84,10 +40,6 @@ cd ..\frontend
 npm test -- --run
 npm run build
 ```
-
-## Docker
-
-Create `.env` from `.env.example`, then run `docker compose up --build`. The frontend is served on port 5173 and the API on port 8000.
 
 ## Academic Support Safeguards
 

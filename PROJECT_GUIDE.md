@@ -102,7 +102,7 @@ After login, every user has a `My Profile` page where they can update their allo
 - Email: `alex.wright@edutrack.edu`
 - Password: `Student@2026`
 
-These accounts are for local development. Production deployments must use new passwords.
+These accounts are for local development and demonstration.
 
 ## 6. What Data Is Stored?
 
@@ -181,7 +181,6 @@ The result is only an advisor support indicator. It is not an automatic academic
 - Pydantic
 - Alembic
 - SQLite for local development
-- PostgreSQL can be used for deployment
 
 ### Machine Learning
 
@@ -269,15 +268,3 @@ npm run build
 ```
 
 The project currently verifies authentication, role permissions, GPA calculation, CSV protection, ML behavior, student registration, profile updates, and frontend routing.
-
-## 15. Important Production Note
-
-The seeded sample records and development passwords are useful for testing only. Before deploying the portal for a real university:
-
-- Change all development passwords.
-- Use a strong random `SECRET_KEY`.
-- Use PostgreSQL or another production database.
-- Configure HTTPS.
-- Review user privacy and retention policies.
-- Back up the database.
-- Review administrator permissions.
