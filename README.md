@@ -41,6 +41,36 @@ The API should not use the local SQLite file in a serverless deployment. Use a p
 
 The current local API is intentionally not exposed to the public internet. Therefore, the Vercel frontend is publicly viewable, while hosted login/data requests require a separately deployed API URL. Vercel's rewrite fallback serves the SPA for unknown paths; it is not an API implementation.
 
+### Free Full-Stack Deployment
+
+For a functional free demo, use:
+
+- Vercel for the React frontend.
+- Render's free web service for the FastAPI backend.
+- Neon or Supabase's free PostgreSQL database for persistent data.
+
+The repository includes `render.yaml` for the backend. Import this repository at:
+
+```text
+https://dashboard.render.com/blueprints/new?repo=https://github.com/farhanshahriar3/EduTrack-AI
+```
+
+When Render asks for environment values, set:
+
+```text
+DATABASE_URL=your Neon or Supabase PostgreSQL connection string
+FIRST_ADMIN_PASSWORD=your new admin password
+BACKEND_CORS_ORIGINS=["https://frontend-peach-kappa-wuch3k5kag.vercel.app"]
+```
+
+After Render gives the API a URL such as `https://edutrack-api.onrender.com`, set this Vercel environment variable and redeploy:
+
+```text
+VITE_API_BASE_URL=https://edutrack-api.onrender.com/api/v1
+```
+
+The free Render service may sleep after inactivity, but PostgreSQL data remains persistent. The first request after sleeping can take a short time to wake the API.
+
 After deployment, add the permanent Vercel URL to this README and to the repository's About website field. Do not commit `.env`, database files, credentials, or `node_modules`.
 
 ## Verification
