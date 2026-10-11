@@ -62,3 +62,8 @@ class Settings(BaseSettings):
         case_sensitive = True
 
 settings = Settings()
+
+# Vercel's function filesystem is read-only except for /tmp. A local SQLite
+# fallback keeps the hosted demo bootable when no external DATABASE_URL exists.
+if os.getenv("VERCEL") and settings.DATABASE_URL == "sqlite:///./edutrack.db":
+    settings.DATABASE_URL = "sqlite:////tmp/edutrack.db"
