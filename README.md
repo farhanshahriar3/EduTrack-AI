@@ -2,8 +2,6 @@
 
 EduTrack AI is a full-stack student information and academic support platform. It combines normalized academic records, weighted GPA calculations, role-based JWT access, safe CSV workflows, institutional analytics, and transparent ML-assisted advisor indicators.
 
-**Demo:** https://frontend-peach-kappa-wuch3k5kag.vercel.app
-
 ## Stack
 
 - Backend: FastAPI, SQLAlchemy 2, Alembic, Pydantic 2, SQLite
