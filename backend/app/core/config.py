@@ -1,8 +1,10 @@
 import os
+import json
 from pathlib import Path
-from typing import List
+from typing import Annotated, List
 from pydantic_settings import BaseSettings
-from pydantic import Field
+from pydantic import Field, field_validator
+from pydantic_settings import NoDecode
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "EduTrack AI"
@@ -24,7 +26,7 @@ class Settings(BaseSettings):
     )
     
     # CORS
-    BACKEND_CORS_ORIGINS: List[str] = [
+    BACKEND_CORS_ORIGINS: Annotated[List[str], NoDecode] = [
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "http://localhost:3000",
@@ -39,6 +41,21 @@ class Settings(BaseSettings):
     
     # Environment
     ENVIRONMENT: str = "development"
+
+    @field_validator("BACKEND_CORS_ORIGINS", mode="before")
+    @classmethod
+    def parse_cors_origins(cls, value):
+        if isinstance(value, list):
+            return value
+        if isinstance(value, str):
+            try:
+                parsed = json.loads(value)
+                if isinstance(parsed, list):
+                    return [str(origin).strip() for origin in parsed if str(origin).strip()]
+            except json.JSONDecodeError:
+                pass
+            return [origin.strip() for origin in value.split(",") if origin.strip()]
+        return value
 
     class Config:
         env_file = str(Path(__file__).resolve().parents[3] / ".env")

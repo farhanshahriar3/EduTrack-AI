@@ -60,8 +60,10 @@ When Render asks for environment values, set:
 ```text
 DATABASE_URL=your Neon or Supabase PostgreSQL connection string
 FIRST_ADMIN_PASSWORD=your new admin password
-BACKEND_CORS_ORIGINS=["https://frontend-peach-kappa-wuch3k5kag.vercel.app"]
+BACKEND_CORS_ORIGINS=https://frontend-peach-kappa-wuch3k5kag.vercel.app
 ```
+
+`BACKEND_CORS_ORIGINS` also accepts a JSON list or multiple comma-separated frontend URLs.
 
 After Render gives the API a URL such as `https://edutrack-api.onrender.com`, set this Vercel environment variable and redeploy:
 
